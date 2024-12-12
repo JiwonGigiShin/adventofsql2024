@@ -1,3 +1,5 @@
+-- https://www.db-fiddle.com/f/26ijsxt8vojxoKNqWEsfkR/0
+
 -- Mrs. Claus needs a comprehensive analysis of the tree farms. Using window functions, create a query that will shed some light on the field perfomance.
 
 -- Show the 3-season moving average per field per season per year
