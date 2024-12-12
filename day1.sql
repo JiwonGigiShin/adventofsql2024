@@ -13,3 +13,21 @@
 -- Fall THEN 3
 -- Winter THEN 4
 -- Find the row with the most three_season_moving_avg
+
+
+WITH numeric_season AS (
+	SELECT *, 
+  CASE WHEN season LIKE 'Spring' THEN 1
+  		WHEN season LIKE 'Summer' THEN 2
+  		WHEN season LIKE 'Fall' THEN 3
+  		ELSE 4 END AS n_season
+  	FROM TreeHarvests
+)
+SELECT 
+harvest_year,
+field_name,
+n_season,
+AVG(trees_harvested) OVER (PARTITION BY field_name, harvest_year ORDER BY n_season ROWS BETWEEN 2 PRECEDING AND CURRENT ROW) AS three_season_moving_avg
+FROM numeric_season 
+ORDER BY three_season_moving_avg DESC
+
